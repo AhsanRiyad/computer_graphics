@@ -159,6 +159,22 @@ glVertex2i(100, 200);
 
 glEnd();
 
+glBegin(GL_QUADS);
+
+glColor3ub (253,238,33);
+
+
+glVertex2i(150, 150);
+glVertex2i(400, 150);
+glVertex2i(400, 200);
+
+glVertex2i(150, 200);
+
+
+
+
+glEnd();
+
 
 
 glBegin(GL_QUADS);
@@ -176,7 +192,7 @@ glVertex2i(400, 200);
 
 glEnd();
 
-glBegin(GL_QUADS);
+glBegin(GL_POLYGON);
 
 glColor3ub (0,0,0);
 
@@ -188,6 +204,50 @@ glVertex2i(100, 0);
 
 
 glEnd();
+
+glBegin(GL_POLYGON);
+
+glColor3ub (0,0,0);
+
+glVertex2i(400, 0);
+glVertex2i(450, 0);
+glVertex2i(450, 150);
+
+
+glVertex2i(400, 150);
+
+
+glEnd();
+
+glBegin(GL_POLYGON);
+
+glColor3ub (11,27,76);
+
+glVertex2i(350, 100);
+glVertex2i(400, 100);
+glVertex2i(400, 150);
+
+
+glVertex2i(350, 150);
+
+
+glEnd();
+
+glBegin(GL_POLYGON);
+
+glColor3ub (11,27,76);
+
+glVertex2i(350, 50);
+glVertex2i(350, 150);
+glVertex2i(200, 150);
+
+
+glVertex2i(200, 50);
+
+
+glEnd();
+
+
 
 
 glFlush ();
