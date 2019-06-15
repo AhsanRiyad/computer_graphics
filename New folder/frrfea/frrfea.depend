@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1560629929 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\frrfea\main.cpp
+1560631101 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\frrfea\main.cpp
 	<cstdio>
 	<GL/gl.h>
 	<GL/glut.h>

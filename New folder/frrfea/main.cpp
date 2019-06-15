@@ -13,8 +13,8 @@ glBegin(GL_POLYGON);
 glColor3ub (0, 13, 26);
 glVertex2i(200, 400);
 glVertex2i(250, 400);
-glVertex2i(250, 450);
-glVertex2i(200, 450);
+glVertex2i(250, 550);
+glVertex2i(200, 550);
 
 glEnd();
 
@@ -22,10 +22,10 @@ glBegin(GL_POLYGON);
 
 glColor3ub (0, 0, 77);
 glVertex2i(350, 400);
-glVertex2i(350, 450);
-glVertex2i(300, 450);
-glVertex2i(300, 425);
-glVertex2i(250, 425);
+glVertex2i(350, 550);
+glVertex2i(300, 550);
+glVertex2i(300, 500);
+glVertex2i(250, 500);
 glVertex2i(250, 400);
 
 glEnd();
@@ -425,7 +425,7 @@ glClearColor(255.0, 255.0, 255.0, 255.0);
 glPointSize(4.0);
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
-gluOrtho2D(-640.0, 640.0, -480.0, 480.0);
+gluOrtho2D(-640.0, 640.0, -600.0, 600.0);
 }
 
 
