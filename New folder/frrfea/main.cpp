@@ -116,6 +116,80 @@ glVertex2i(200, 250);
 glEnd();
 
 
+glBegin(GL_QUADS);
+
+glColor3ub (249,156,50);
+
+glVertex2i(150, 200);
+glVertex2i(150, 250);
+
+glVertex2i(100, 250);
+glVertex2i(100, 200);
+
+
+glEnd();
+
+glBegin(GL_QUADS);
+
+glColor3ub (249,156,50);
+
+glVertex2i(400, 200);
+glVertex2i(450, 200);
+
+glVertex2i(450, 250);
+glVertex2i(400, 250);
+
+
+glEnd();
+
+
+
+
+glBegin(GL_QUADS);
+
+glColor3ub (11,27,76);
+
+glVertex2i(100, 150);
+glVertex2i(150, 150);
+
+glVertex2i(150, 200);
+
+glVertex2i(100, 200);
+
+
+glEnd();
+
+
+
+glBegin(GL_QUADS);
+
+glColor3ub (11,27,76);
+
+
+glVertex2i(400, 150);
+glVertex2i(450, 150);
+glVertex2i(450, 200);
+glVertex2i(400, 200);
+
+
+
+
+glEnd();
+
+glBegin(GL_QUADS);
+
+glColor3ub (0,0,0);
+
+glVertex2i(150, 0);
+glVertex2i(150, 150);
+glVertex2i(100, 150);
+
+glVertex2i(100, 0);
+
+
+glEnd();
+
+
 glFlush ();
 }
 
@@ -126,7 +200,7 @@ glClearColor(255.0, 255.0, 255.0, 255.0);
 glPointSize(4.0);
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
-gluOrtho2D(0.0, 640.0, 0.0, 480.0);
+gluOrtho2D(-640.0, 640.0, -480.0, 480.0);
 }
 
 
