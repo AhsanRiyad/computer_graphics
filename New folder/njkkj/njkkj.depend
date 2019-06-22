@@ -1,6 +1,6 @@
 # depslib dependency file v1.0
-1560993381 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\njkkj\main.cpp
-	<iostream>
+1561219939 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\njkkj\main.cpp
+	<cstdio>
 	<GL/gl.h>
 	<GL/glut.h>
 
