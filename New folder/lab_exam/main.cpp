@@ -434,24 +434,7 @@ glEnd();
 
 
 
-
 //q4
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -466,7 +449,6 @@ glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
 gluOrtho2D(-320.0, 320.0, -240.0, 240.0);
 }
-
 
 
 
