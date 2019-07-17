@@ -215,6 +215,7 @@ glEnd();
 glColor3ub (255, 255 , 255);
 glBegin(GL_POLYGON);
 glVertex2i(70, 60);
+glVertex2i(60, 60);
 glVertex2i(60 , 70 );
 glVertex2i(300, 240);
 glVertex2i(320, 240);
@@ -230,7 +231,7 @@ glEnd();
 glColor3ub (204, 51 , 0);
 glBegin(GL_POLYGON);
 glVertex2i(100, 60);
-glVertex2i(75 , 65 );
+glVertex2i(70 , 60 );
 glVertex2i(320, 240);
 glVertex2i(320, 220);
 glEnd();
@@ -305,6 +306,7 @@ glEnd();
 glColor3ub (255, 255 , 255);
 glBegin(GL_POLYGON);
 glVertex2i(-70, -60);
+glVertex2i(-60, -60);
 glVertex2i(-60 , -70 );
 glVertex2i(-300, -240);
 glVertex2i(-320, -240);
@@ -320,13 +322,14 @@ glEnd();
 glColor3ub (204, 51 , 0);
 glBegin(GL_POLYGON);
 glVertex2i(-100, -60);
-glVertex2i(-75 , -65 );
+glVertex2i(-70 , -60 );
 glVertex2i(-320, -240);
 glVertex2i(-320, -220);
 glEnd();
 
 
 //red
+
 
 
 
@@ -387,6 +390,7 @@ glEnd();
 glColor3ub (255, 255 , 255);
 glBegin(GL_POLYGON);
 glVertex2i(70, -60);
+glVertex2i(60, -60);
 glVertex2i(60 , -70 );
 glVertex2i(300, -240);
 glVertex2i(320, -240);
@@ -402,13 +406,14 @@ glEnd();
 glColor3ub (204, 51 , 0);
 glBegin(GL_POLYGON);
 glVertex2i(100, -60);
-glVertex2i(75 , -65 );
+glVertex2i(70 , -60 );
 glVertex2i(320, -240);
 glVertex2i(320, -220);
 glEnd();
 
 
 //red
+
 
 
 
