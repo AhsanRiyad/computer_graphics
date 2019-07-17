@@ -144,7 +144,7 @@ glEnd();
 glColor3ub (204, 51 , 0);
 glBegin(GL_POLYGON);
 glVertex2i(-100, 60);
-glVertex2i(-75 , 65 );
+glVertex2i(-75 , 60 );
 glVertex2i(-320, 240);
 glVertex2i(-320, 220);
 glEnd();
