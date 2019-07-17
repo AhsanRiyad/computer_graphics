@@ -1,6 +1,6 @@
 # depslib dependency file v1.0
-1561222540 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\njkkj\main.cpp
-	<iostream>
+1562778257 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\arfef\main.cpp
+	<bits/stdc++.h>
 	<GL/gl.h>
 	<GL/glut.h>
 

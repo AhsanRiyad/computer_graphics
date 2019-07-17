@@ -1,74 +1,98 @@
-#include <cstdio>
+#include <iostream>
+
 #include<GL/gl.h>
 #include <GL/glut.h>
+
+
+using namespace std;
+
+int abs (int a , int b){
+
+return a-b;
+
+}
+
 
 void myDisplay(void)
 {
 glClear (GL_COLOR_BUFFER_BIT);
 glColor3ub (128, 128, 128);
-glPointSize(4.0);
+glPointSize(5.0);
 
-int x1=0,y1=0,x2=80,y2=0,x3=80,y3=80,x4=0,y4=80;
 
-glBegin(GL_QUADS);
-    for(int i=0;i<8;i++)
-    {
-        int new_x1=x1,new_x2=x2,new_x3=x3,new_x4=x4;
-        for(int j=0;j<8;j++)
-        {
-            if((i+j)%2==0){
 
-                glColor3ub(0,0,0);
-                glVertex2i(new_x1,y1);
-                glVertex2i(new_x2,y2);
-                glVertex2i(new_x3,y3);
-                glVertex2i(new_x4,y4);
+//int x1 = 100 , x2 = 200 , y1 = 100 , y2 = 300;
+//int x = 100 , y = 100;
 
-            }
+int x1 = -100 , x2 = 200 , y1 = -100 , y2 = 300;
 
-            else{
 
-                glColor3ub(255,255,255);
+cout << "enter x1\n";
+cin >> x1;
+cout << "enter x2\n";
+cin >> x2;
+cout << "enter y1\n";
+cin >> y1;
+cout << "enter y2\n";
+cin >> y2;
 
-                glVertex2i(new_x1,y1);
-                glVertex2i(new_x2,y2);
-                glVertex2i(new_x3,y3);
-                glVertex2i(new_x4,y4);
+int x = x1 , y = y1;
 
-            }
+int lenght = x1 - x2;
 
-                new_x1+=90;
-                new_x2+=90;
-                new_x3+=90;
-                new_x4+=90;
-        }
-        y1+=70;
-        y2+=70;
-        y3+=70;
-        y4+=70;
-    }
-    glEnd();
+
+
+if(abs(y2,y1) > lenght ){
+      lenght = abs(y2,y1);
+}
+
+float xincrement = abs(x2,x1) / lenght ;
+
+float yincrement = abs(y2,y1) / lenght ;
+
+x = x +.5 ;
+y = y +.5 ;
+
+for(int i = 1 ; i< lenght ; i++){
+
+      glBegin(GL_POINTS);
+
+      glColor3ub (0, 0, 77);
+      glVertex2i(x, y);
+      //glVertex2i(y, 550);
+
+
+      glEnd();
+
+      x = x + xincrement;
+      y = y + yincrement;
+
+
+}
+
+
+
 glFlush ();
 }
 
+
 void myInit (void)
 {
-glClearColor(0.0, 0.0, 0.0, 0.0);
+glClearColor(255.0, 255.0, 255.0, 255.0);
 glPointSize(4.0);
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
-gluOrtho2D(0.0, 800.0, 0.0, 600.0);
+gluOrtho2D(-640.0, 640.0, -600.0, 600.0);
 }
-
-
 
 
 
 int main(int argc, char** argv)
 {
+
 glutInit(&argc, argv);
 glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
-glutInitWindowSize (800, 600);
+glutInitWindowSize (640, 480);
 glutInitWindowPosition (100, 150);
 glutCreateWindow ("");
 glutDisplayFunc(myDisplay);
