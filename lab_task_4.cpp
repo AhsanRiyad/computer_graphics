@@ -57,10 +57,10 @@ cin>> n ;
 switch (n)
 {
     case 1: // code to be executed if n = 1;
-        cout << "Please enter rotation angle: \n" ;
+        cout << "Please enter rotation  angle: \n" ;
         cin >> angle ;
         cout << "\n" ;
-
+        
         glBegin(GL_TRIANGLES);
         glVertex2i((((x1*cos(angle))-(y1*sin(angle)))),(((y1*cos(angle))+(x1*sin(angle)))));
         glVertex2i((((x2*cos(angle))-(y2*sin(angle)))),(((y2*cos(angle))+(x2*sin(angle)))));
@@ -88,7 +88,7 @@ switch (n)
         cout << "Please enter Scaling factor: \n" ;
         cin >> factor ;
         cout << "\n" ;
-
+        
         glBegin(GL_TRIANGLES);
         glVertex2i(0,0);
         glVertex2i(x2*factor,y2*factor);

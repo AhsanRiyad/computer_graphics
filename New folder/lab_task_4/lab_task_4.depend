@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1563395236 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\lab_task_4\main.cpp
+1563419650 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\lab_task_4\main.cpp
 	<cstdio>
 	<GL/gl.h>
 	<GL/glut.h>
