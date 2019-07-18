@@ -57,7 +57,28 @@ cin>> n ;
 switch (n)
 {
     case 1: // code to be executed if n = 1;
-        cout << "Please enter rotation angle: \n" ;
+        cout << "Select start point for rotation: \n" ;
+
+        cout << "1: From Origin \n";
+        cout << "2: Automatic process \n";
+
+        int option ;
+        cin >> option ;
+
+        if(option == 1){
+        cout << "Please enter rotation angle";
+        cin >> angle ;
+        cout << "\n" ;
+
+        glBegin(GL_TRIANGLES);
+        glVertex2i(0,0);
+        glVertex2i((((x2*cos(angle))-(y2*sin(angle)))),(((y2*cos(angle))+(x2*sin(angle)))));
+        glVertex2i((((x3*cos(angle))-(y3*sin(angle)))),(((y3*cos(angle))+(x3*sin(angle)))));
+        glEnd();
+        glFlush ();
+        }else{
+
+        cout << "Please enter rotation angle";
         cin >> angle ;
         cout << "\n" ;
 
@@ -67,6 +88,11 @@ switch (n)
         glVertex2i((((x3*cos(angle))-(y3*sin(angle)))),(((y3*cos(angle))+(x3*sin(angle)))));
         glEnd();
         glFlush ();
+
+
+        }
+
+
         break;
     case 2: // code to be executed if n = 2;
 
