@@ -13,11 +13,10 @@ void update(int value) {
 
 	glutPostRedisplay();
 
+    speed += 0.2;
 
 	glutTimerFunc(100, update, 0);
-    if(speed<=35.0){
-        	speed += 0.2;
-    }
+
 }
 
 
@@ -54,14 +53,17 @@ void display() {
    glClear(GL_COLOR_BUFFER_BIT);
    glColor3ub(255,0,0);
 
-   drawCircle(0.0f,0.0f,0.2f);
+   drawCircle(0.0f,0.0f,0.3f);
 
    glPushMatrix();
    glRotatef(position,0,0,-1);
-   drawTriangle(0.2,0,0.6,-0.1,0.7,0.2);
-   drawTriangle(-0.2,0,-0.6,0.1,-0.7,-0.2);
-   drawTriangle(0,0.2,0.1,0.6,-0.2,0.7);
-   drawTriangle(0,-0.2,-0.1,-0.6,0.2,-0.7);
+   drawTriangle(0.0,0.3,0.2,0.5,-0.2,0.5);
+   drawTriangle(0.0,-0.3,0.2,-0.5,-0.2,-0.5);
+   drawTriangle(0.3,0.0,0.5,-0.2,0.5,0.2);
+   drawTriangle(-0.3,0.0,-0.5,+0.2,-0.5,-0.2);
+   //drawTriangle(-0.2,0,-0.6,0.1,-0.7,-0.2);
+   //drawTriangle(0,0.2,0.1,0.6,-0.2,0.7);
+   //drawTriangle(0,-0.2,-0.1,-0.6,0.2,-0.7);
    glPopMatrix();
 
    glFlush();

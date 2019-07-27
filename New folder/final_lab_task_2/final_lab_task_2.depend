@@ -1,13 +1,8 @@
 # depslib dependency file v1.0
-1564248257 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\final_lab_task_2\main.cpp
-	<cstdio>
+1564249739 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\final_lab_task_2\main.cpp
+	<bits/stdc++.h>
 	<GL/gl.h>
 	<GL/glut.h>
-	<bits/stdc++.h>
-	<stdlib.h>
-	<time.h>
-	<iostream>
-	<cmath>
 
 1301111164 c:\program files (x86)\codeblocks\mingw\include\gl\gl.h
 
