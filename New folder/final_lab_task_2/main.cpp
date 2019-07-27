@@ -51,7 +51,7 @@ bool random_ball_2 = true ;
 bool random_ball_3 = true ;
 bool random_ball_4 = true ;
 
-
+void drawBitmapText(char *string,float x,float y,float z) ;
 
 void update(int value) {
 
@@ -136,6 +136,9 @@ void update(int value) {
 
   glutTimerFunc(100, update, 0);
 }
+
+
+
 void init() {
    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }

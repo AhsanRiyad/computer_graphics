@@ -51,7 +51,7 @@ bool random_ball_2 = true ;
 bool random_ball_3 = true ;
 bool random_ball_4 = true ;
 
-
+void drawBitmapText(char *string,float x,float y,float z) ;
 
 void update(int value) {
 
@@ -136,6 +136,9 @@ void update(int value) {
 
   glutTimerFunc(100, update, 0);
 }
+
+
+
 void init() {
    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
@@ -265,7 +268,7 @@ void display() {
 
       cout << "collision\n" ; 
       glPushMatrix();
-      glColor3ub(255,255,255);
+      glColor3ub(0,0,0);
 
       position_stone_x = position ;
       glTranslatef(0 ,random_ball_position_y1, 0.0f);
@@ -296,7 +299,7 @@ void display() {
     if( abs(random_ball_position_y2 - position_stone_y1) > 0.6f && abs (xpos2 - position_stone_x) < 0.2f )
     {
       glPushMatrix();
-      glColor3ub(255,255,255);
+      glColor3ub(0,0,0);
       position_stone_x = position ;
       glTranslatef(0 ,random_ball_position_y2 , 0.0f);
        //circle
@@ -329,7 +332,7 @@ void display() {
     if( abs(random_ball_position_y3 - position_stone_y1) > 0.6f  && abs (xpos3 - position_stone_x) < 0.2f )
     {
       glPushMatrix();
-    glColor3ub(255,255,255);
+    glColor3ub(0,0,0);
     position_stone_x = position ;
     glTranslatef(0 , random_ball_position_y3 , 0.0f);
      //circle
@@ -362,7 +365,7 @@ void display() {
      if( abs(random_ball_position_y4 - position_stone_y1) > 0.6f && abs (xpos4 - position_stone_x) < 0.2f )
     {
       glPushMatrix();
-      glColor3ub(255,255,255);
+      glColor3ub(0,0,0);
 
       position_stone_x = position ;
       glTranslatef(0 , random_ball_position_y4 , 0.0f);
