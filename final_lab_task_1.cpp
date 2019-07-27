@@ -244,38 +244,79 @@ void display() {
 
     //random ball 1
 
-    glPushMatrix();
-    glColor3ub(255,255,255);
+    if (random_ball_position_y1 == position_stone_y1)
+    {
+      glPushMatrix();
+      glColor3ub(0,0,0);
 
-    position_stone_x = position ;
-    glTranslatef(0 ,random_ball_position_y1, 0.0f);
-     //circle
+      position_stone_x = position ;
+      glTranslatef(0 ,random_ball_position_y1, 0.0f);
+       //circle
 
 
 
 
 
-    drawCircle(xpos1, 1.0f  , .08f);
+      drawCircle(xpos1, 1.0f  , .08f);
 
-    glPopMatrix();
+      glPopMatrix();
+    }else{
+      glPushMatrix();
+      glColor3ub(255,255,255);
+
+      position_stone_x = position ;
+      glTranslatef(0 ,random_ball_position_y1, 0.0f);
+       //circle
+      drawCircle(xpos1, 1.0f  , .08f);
+
+      glPopMatrix();
+    }
+
+
+    
 
 
 
     //random ball 2
+    if (random_ball_position_y2 == position_stone_y1)
+    {
+      glPushMatrix();
+      glColor3ub(0,0,0);
+      position_stone_x = position ;
+      glTranslatef(0 ,random_ball_position_y2 , 0.0f);
+       //circle
+      drawCircle(xpos2, 1.0f , .08f);
 
-    glPushMatrix();
-    glColor3ub(136,0,27);
-    position_stone_x = position ;
-    glTranslatef(0 ,random_ball_position_y2 , 0.0f);
-     //circle
-    drawCircle(xpos2, 1.0f , .08f);
+      glPopMatrix();
+    }else{
 
-    glPopMatrix();
+      glPushMatrix();
+      glColor3ub(136,0,27);
+      position_stone_x = position ;
+      glTranslatef(0 ,random_ball_position_y2 , 0.0f);
+       //circle
+      drawCircle(xpos2, 1.0f , .08f);
+
+      glPopMatrix();
+
+    }
+    
 
 
     //random ball 3
 
+    if(random_ball_position_y3 == position_stone_y1)
+    {
     glPushMatrix();
+    glColor3ub(0,0,0);
+    position_stone_x = position ;
+    glTranslatef(0 , random_ball_position_y3 , 0.0f);
+     //circle
+    drawCircle(xpos3, 1.0f , .08f);
+
+    glPopMatrix();
+    }else{
+      glPushMatrix();
     glColor3ub(63,72,204);
     position_stone_x = position ;
     glTranslatef(0 , random_ball_position_y3 , 0.0f);
@@ -283,25 +324,41 @@ void display() {
     drawCircle(xpos3, 1.0f , .08f);
 
     glPopMatrix();
+    }
+
+    
 
 
 
     //random ball 4
 
-    glPushMatrix();
-    glColor3ub(14,209,69);
+    if( random_ball_position_y4 - position_stone_y1 < 0.2 || random_ball_position_y4 - position_stone_y1 < -0.2  )
+    {
+      cout<< "inside conditional block" << "\n"; 
+      glPushMatrix();
+      //glColor4f(0.054,0.819,0.27,2);
+      glColor3ub(0,0,0);
+      position_stone_x = position ;
+      glTranslatef(0 , random_ball_position_y4 , 0.0f);
+       //circle
+      drawCircle(xpos4, 1.0f , .08f);
 
-    position_stone_x = position ;
-    glTranslatef(0 , random_ball_position_y4 , 0.0f);
-     //circle
-    drawCircle(xpos4, 1.0f , .08f);
+      glPopMatrix();
 
-    glPopMatrix();
+    }else{
+      cout<< "inside else block" << "\n" ; 
+      glPushMatrix();
+      glColor3ub(14,209,69);
 
+      position_stone_x = position ;
+      glTranslatef(0 , random_ball_position_y4 , 0.0f);
+       //circle
+      drawCircle(xpos4, 1.0f , .08f);
+      //cout << random_ball_position_y4 ; 
+      glPopMatrix();
 
-
-
-
+    } 
+    
 
 
 
@@ -315,6 +372,7 @@ void display() {
      //circle
     drawCircle(0.0f,-.225f , .08f);
 
+    //cout << position_stone_y1 ; 
     glPopMatrix();
 
 
@@ -355,7 +413,7 @@ void display() {
 
  glBegin(GL_QUADS);
       // glColor3ub(204,127,50);
-      glColor4f(255, 202, 24, 1);
+      glColor4f(0.8,0.498,0.196, 1);
       glVertex2f(-0.06f, -0.6f);
       glVertex2f( 0.06f, -0.6f);
       glVertex2f( 0.06f,  -0.3f);
