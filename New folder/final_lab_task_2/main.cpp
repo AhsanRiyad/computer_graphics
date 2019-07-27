@@ -26,10 +26,21 @@ GLfloat speed_stone = 0.0f;
 GLfloat random_ball_position_y1 = 0.0f ;
 GLfloat random_ball_position_y2 = 0.0f ;
 GLfloat random_ball_position_y3 = 0.0f ;
+GLfloat random_ball_position_y4 = 0.0f ;
+
+
 
 bool up_click_check = false ;
 
 
+
+GLfloat xpos1 = -0.1f ;
+GLfloat ypos = 1.0f;
+
+
+GLfloat xpos2 = -0.3f ;
+GLfloat xpos3 = -0.1f ;
+GLfloat xpos4 = -0.3f ;
 
 void update(int value) {
 
@@ -57,9 +68,14 @@ void update(int value) {
 
     if(random_ball_position_y1<-2.0f){
 
+
+
         float i = rand() % 9 + 1 ;
         float randValue =  i/10 ;
 
+        //cout<< randValue;
+
+        xpos1 =  -randValue ;
         random_ball_position_y1 = 1.0f + randValue;
     }
 
@@ -67,8 +83,12 @@ void update(int value) {
 
     if(random_ball_position_y2<-2.0f){
 
-        float i = rand() % 9 + 1 ;
+       float i = rand() % 9 + 1 ;
         float randValue =  i/10 ;
+
+
+
+        xpos2 =  -randValue  ;
         random_ball_position_y2 = 1.0f + randValue;
     }
 
@@ -78,10 +98,21 @@ void update(int value) {
 
         float i = rand() % 9 + 1 ;
         float randValue =  i/10 ;
+
+        xpos3 =  randValue ;
         random_ball_position_y3 = 1.0f + randValue;
     }
 
+     random_ball_position_y4 -=.1f;
 
+    if(random_ball_position_y4<-2.0f){
+
+        float i = rand() % 9 + 1 ;
+        float randValue =  i/10 ;
+
+        xpos4 =  randValue;
+        random_ball_position_y4 = 1.0f + randValue;
+    }
 
 
 
@@ -219,13 +250,17 @@ void display() {
     //random ball 1
 
     glPushMatrix();
+    glColor3ub(255,255,255);
+
     position_stone_x = position ;
     glTranslatef(0 ,random_ball_position_y1, 0.0f);
      //circle
-     float xx = rand() % 10 + 1 ;
-     float x1 = xx / 10 ;
 
-    drawCircle(-0.7f, 1.0f , .08f);
+
+
+
+
+    drawCircle(xpos1, 1.0f  , .08f);
 
     glPopMatrix();
 
@@ -234,10 +269,11 @@ void display() {
     //random ball 2
 
     glPushMatrix();
+    glColor3ub(136,0,27);
     position_stone_x = position ;
     glTranslatef(0 ,random_ball_position_y2 , 0.0f);
      //circle
-    drawCircle(0.1f, 1.0f , .08f);
+    drawCircle(xpos2, 1.0f , .08f);
 
     glPopMatrix();
 
@@ -245,10 +281,25 @@ void display() {
     //random ball 3
 
     glPushMatrix();
+    glColor3ub(63,72,204);
     position_stone_x = position ;
     glTranslatef(0 , random_ball_position_y3 , 0.0f);
      //circle
-    drawCircle(0.9f, 1.0f , .08f);
+    drawCircle(xpos3, 1.0f , .08f);
+
+    glPopMatrix();
+
+
+
+    //random ball 4
+
+    glPushMatrix();
+    glColor3ub(14,209,69);
+
+    position_stone_x = position ;
+    glTranslatef(0 , random_ball_position_y4 , 0.0f);
+     //circle
+    drawCircle(xpos4, 1.0f , .08f);
 
     glPopMatrix();
 
@@ -262,6 +313,8 @@ void display() {
    //ball that will hit the target
 
     glPushMatrix();
+    glColor3ub(255,202,24);
+
     position_stone_x = position ;
     glTranslatef(position_stone_x ,position_stone_y, 0.0f);
      //circle
