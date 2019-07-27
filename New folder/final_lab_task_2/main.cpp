@@ -125,10 +125,7 @@ void update(int value) {
     }
 
 
-    if( abs(random_ball_position_y4 - position_stone_y1) < 0.1  )
-    {
-      random_ball_4 = false ;
-    }
+
 
 
 
@@ -259,6 +256,14 @@ void display() {
     //random ball 1
 
 
+
+// && abs (xpos1 - position_stone_x) < 0.3f
+
+    if( abs(random_ball_position_y1 - position_stone_y1) > 0.6f  )
+    {
+
+
+      cout << "collision\n" ;
       glPushMatrix();
       glColor3ub(255,255,255);
 
@@ -268,15 +273,30 @@ void display() {
       drawCircle(xpos1, 1.0f  , .08f);
 
       glPopMatrix();
+    }else{
+        glPushMatrix();
+      glColor3ub(100,200,255);
 
+      position_stone_x = position ;
+      glTranslatef(0 ,random_ball_position_y1, 0.0f);
+       //circle
+      drawCircle(xpos1, 1.0f  , .08f);
+
+      glPopMatrix();
+    }
 
 
 
 
     //random ball 2
 
+
+
+
+    if( abs(random_ball_position_y2 - position_stone_y1) > 0.6f  )
+    {
       glPushMatrix();
-      glColor3ub(136,0,27);
+      glColor3ub(255,255,255);
       position_stone_x = position ;
       glTranslatef(0 ,random_ball_position_y2 , 0.0f);
        //circle
@@ -284,13 +304,41 @@ void display() {
 
       glPopMatrix();
 
+    }else{
+        glPushMatrix();
+      glColor3ub(136,0,27);
+      position_stone_x = position ;
+      glTranslatef(0 ,random_ball_position_y2 , 0.0f);
+       //circle
+      drawCircle(xpos2, 1.0f , .08f);
+
+      glPopMatrix();
+    }
+
+
+
+
 
 
 
     //random ball 3
 
 
+
+
+    if( abs(random_ball_position_y3 - position_stone_y1) > 0.6f  )
+    {
       glPushMatrix();
+    glColor3ub(255,255,255);
+    position_stone_x = position ;
+    glTranslatef(0 , random_ball_position_y3 , 0.0f);
+     //circle
+    drawCircle(xpos3, 1.0f , .08f);
+
+    glPopMatrix();
+
+    }else{
+        glPushMatrix();
     glColor3ub(63,72,204);
     position_stone_x = position ;
     glTranslatef(0 , random_ball_position_y3 , 0.0f);
@@ -299,6 +347,11 @@ void display() {
 
     glPopMatrix();
 
+    }
+
+
+
+
 
 
 
@@ -306,18 +359,8 @@ void display() {
     //random ball 4
 
 
-    if(random_ball_4 == true){
-      glPushMatrix();
-      glColor3ub(14,209,69);
-
-      position_stone_x = position ;
-      glTranslatef(0 , random_ball_position_y4 , 0.0f);
-       //circle
-      drawCircle(xpos4, 1.0f , .08f);
-      //cout << random_ball_position_y4 ;
-      glPopMatrix();
-    }else if(random_ball_4==false){
-
+     if( abs(random_ball_position_y4 - position_stone_y1) > 0.6f  )
+    {
       glPushMatrix();
       glColor3ub(255,255,255);
 
@@ -327,8 +370,18 @@ void display() {
       drawCircle(xpos4, 1.0f , .08f);
       //cout << random_ball_position_y4 ;
       glPopMatrix();
+    }else{
+      glPushMatrix();
+      glColor3ub(14,209,69);
 
+      position_stone_x = position ;
+      glTranslatef(0 , random_ball_position_y4 , 0.0f);
+       //circle
+      drawCircle(xpos4, 1.0f , .08f);
+      //cout << random_ball_position_y4 ;
+      glPopMatrix();
     }
+
 
 
 
