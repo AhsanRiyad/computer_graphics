@@ -259,7 +259,7 @@ void display() {
 
 // && abs (xpos1 - position_stone_x) < 0.3f
 
-    if( abs(random_ball_position_y1 - position_stone_y1) > 0.6f  )
+    if( abs(random_ball_position_y1 - position_stone_y1) > 0.6f && abs (xpos1 - position_stone_x) < 0.2f )
     {
 
 
@@ -293,7 +293,7 @@ void display() {
 
 
 
-    if( abs(random_ball_position_y2 - position_stone_y1) > 0.6f  )
+    if( abs(random_ball_position_y2 - position_stone_y1) > 0.6f && abs (xpos2 - position_stone_x) < 0.2f )
     {
       glPushMatrix();
       glColor3ub(255,255,255);
@@ -326,7 +326,7 @@ void display() {
 
 
 
-    if( abs(random_ball_position_y3 - position_stone_y1) > 0.6f  )
+    if( abs(random_ball_position_y3 - position_stone_y1) > 0.6f  && abs (xpos3 - position_stone_x) < 0.2f )
     {
       glPushMatrix();
     glColor3ub(255,255,255);
@@ -359,7 +359,7 @@ void display() {
     //random ball 4
 
 
-     if( abs(random_ball_position_y4 - position_stone_y1) > 0.6f  )
+     if( abs(random_ball_position_y4 - position_stone_y1) > 0.6f && abs (xpos4 - position_stone_x) < 0.2f )
     {
       glPushMatrix();
       glColor3ub(255,255,255);
