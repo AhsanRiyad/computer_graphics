@@ -22,13 +22,15 @@ GLfloat position_stone_x = 0.0f;
 GLfloat position_stone_y = 0.0f;
 GLfloat speed_stone = 0.0f;
 
+GLfloat random_ball_position_y = 0.0f ;
+
 bool up_click_check = false ;
 
 
 
 void update(int value) {
 
-    if(position > 1.0){
+    if(position > 1.4){
         position = -1.2f;
     }
 
@@ -41,6 +43,14 @@ void update(int value) {
       up_click_check = false ;
       position_stone_y = 0.0f ;
     }
+    random_ball_position_y -=.1f;
+
+    if(random_ball_position_y<-2.0f){
+        random_ball_position_y = 1.0f;
+    }
+
+
+
 
 
 
@@ -166,8 +176,23 @@ void display() {
 
 
 
+    //random ball
+
+    glPushMatrix();
+    position_stone_x = position ;
+    glTranslatef(0 ,random_ball_position_y, 0.0f);
+     //circle
+    drawCircle(0.0f, 1.0f , .08f);
+
+    glPopMatrix();
 
 
+
+
+
+
+
+   //ball that will hit the target
 
     glPushMatrix();
     position_stone_x = position ;
