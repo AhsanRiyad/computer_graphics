@@ -11,10 +11,10 @@ float angle=45.0;
 void update(int value) {
     position += speed;
 
-	glutPostRedisplay();
+    angle+=2.0;
 
     speed += 0.2;
-
+    glutPostRedisplay();
 	glutTimerFunc(100, update, 0);
 
 }
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(620, 620);
     glutCreateWindow("Test");
     glutDisplayFunc(display);
-    glutTimerFunc(1000, update, 0);
+    glutTimerFunc(100, update, 0);
     glutMainLoop();
     return 0;
 }
