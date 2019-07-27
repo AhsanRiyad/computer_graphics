@@ -62,23 +62,12 @@ void display() {
 
 
 
- glBegin(GL_QUADS);
-      glColor3ub(204,127,50);
-      glVertex2f(-0.06f, -0.6f);
-      glVertex2f( 0.06f, -0.6f);
-      glVertex2f( 0.06f,  -0.3f);
-      glVertex2f(-0.06f, -0.3f);
-   glEnd();
-
-
-   glBegin(GL_POLYGON);
-      glColor3ub(255,208,0);
-      glVertex2f( 0.07f, -0.7f);
-      glVertex2f( 0.0f,  -.8f);
-      glVertex2f(-0.07f, -0.7f);
-      glVertex2f(0.06f, -0.6f);
-      glVertex2f(-0.06f, -0.6f);
-      glVertex2f(-0.07f, -0.7f);
+   glBegin(GL_QUADS);
+      glColor3f(1.0f, 0.0f, 0.0f);
+      glVertex2f(-0.2f, -0.2f);
+      glVertex2f( 0.2f, -0.2f);
+      glVertex2f( 0.2f,  0.2f);
+      glVertex2f(-0.2f,  0.2f);
    glEnd();
 
 
@@ -86,7 +75,19 @@ void display() {
 
 glPushMatrix();
 glTranslatef(position,0.0f, 0.0f);
-
+   glBegin(GL_QUADS);
+      // glColor3f(1.0f, 0.0f, 0.0f);
+      // glVertex2f(-0.2f, -0.2f);
+      // glVertex2f( 0.2f, -0.2f);
+      // glVertex2f( 0.2f,  0.2f);
+      // glVertex2f(-0.2f,  0.2f);
+   glEnd();
+   glBegin(GL_TRIANGLES);
+   // glColor3f(0.0f, 0.0f, 1.0f);
+   // glVertex2f(0.2f,-0.2f);
+   // glVertex2f(0.5f, 0.0f);
+   // glVertex2f(0.2f, 0.2f);
+   glEnd();
 
 glPopMatrix();
 
@@ -99,7 +100,7 @@ glPopMatrix();
 
 int main(int argc, char** argv) {
    glutInit(&argc, argv);
-   glutInitWindowSize(720, 720);
+   glutInitWindowSize(320, 320);
    glutInitWindowPosition(50, 50);
    glutCreateWindow("Basic Animation");
    glutDisplayFunc(display);
