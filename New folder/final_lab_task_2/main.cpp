@@ -7,16 +7,18 @@
 
 
 GLfloat position = 0.0f;
-GLfloat speed = 5.0f;
+GLfloat speed = 0.1f;
 float angle=45.0;
 
 
 void update(int value) {
 
-    if(position > 1.0)
+    if(position > 1.0){
         position = -1.2f;
+    }
 
-    position += speed;
+
+    //position += speed;
 
 	glutPostRedisplay();
 
@@ -45,10 +47,12 @@ void handleKeypress(unsigned char key, int x, int y) {
 	switch (key) {
 
 case 'a':
-    speed = 0.0f;
+    //speed = 0.0f;
+    position += .1f;
     break;
 case 'w':
-    speed += 0.1f;
+    //speed += 0.1f;
+    position -= .1f;
     break;
 
 
@@ -57,6 +61,27 @@ glutPostRedisplay();
 
 	}
 }
+
+void
+catchKey(int key, int x, int y)
+{
+    if(key == GLUT_KEY_LEFT){
+        position -= .1f;
+        printf("Left key is pressed\n");
+    }
+
+    else if(key == GLUT_KEY_RIGHT){
+        position += .1f;
+        printf("Right key is pressed\n");
+    }
+
+    else if(key == GLUT_KEY_DOWN)
+        printf("Down key is pressed\n");
+    else if(key == GLUT_KEY_UP)
+        printf("Up key is pressed\n");
+}
+
+
 
 
 void drawCircle(float x,float y,float radius)
@@ -83,7 +108,8 @@ void display() {
    glLoadIdentity();
 
 
-
+glPushMatrix();
+glTranslatef(position,0.0f, 0.0f);
 
 
     //circle
@@ -176,8 +202,7 @@ void display() {
 
 
 
-glPushMatrix();
-glTranslatef(position,0.0f, 0.0f);
+
 
 
 glPopMatrix();
@@ -197,6 +222,7 @@ int main(int argc, char** argv) {
    glutDisplayFunc(display);
    init();
    glutKeyboardFunc(handleKeypress);
+   glutSpecialFunc(catchKey);
    glutMouseFunc(handleMouse);
    glutTimerFunc(1000, update, 0);
    glutMainLoop();
