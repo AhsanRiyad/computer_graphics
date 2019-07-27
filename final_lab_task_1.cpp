@@ -20,7 +20,9 @@ GLfloat first_point_x =  -0.06f ;
 GLfloat first_point_y =  -0.6f ;
 
 GLfloat position_stone_x = 0.0f;
-GLfloat position_stone_y = 0.0f;
+GLfloat position_stone_y1 = 0.0f;
+GLfloat position_stone_y2 = 0.0f;
+GLfloat position_stone_y3 = 0.0f;
 GLfloat speed_stone = 0.0f;
 
 GLfloat random_ball_position_y1 = 0.0f ;
@@ -54,14 +56,20 @@ void update(int value) {
     }
 
     if(up_click_check == true){
-      position_stone_y += .05f ;
+      position_stone_y1 += .05f ;
     }
 
 
-    if(position_stone_y > 1.0 ){
+    if(position_stone_y1 > 1.0 ){
       up_click_check = false ;
-      position_stone_y = 0.0f ;
+      position_stone_y1 = 0.0f ;
     }
+
+
+    /*if(up_click_check == true && position_stone_y1 - position_stone_y3 > 0.1 || position_stone_y1 - position_stone_y3 < -0.1 ){
+      //up_click_check = false ;
+      position_stone_y3 = 0.0f ;
+    }*/
 
 
     random_ball_position_y1 -=.1f;
@@ -295,7 +303,7 @@ void display() {
 
     glPushMatrix();
     glColor3ub(14,209,69);
-    
+
     position_stone_x = position ;
     glTranslatef(0 , random_ball_position_y4 , 0.0f);
      //circle
@@ -310,17 +318,43 @@ void display() {
 
 
 
-   //ball that will hit the target
+   //ball that will hit the target 1
 
     glPushMatrix();
     glColor3ub(255,202,24);
-    
+
     position_stone_x = position ;
-    glTranslatef(position_stone_x ,position_stone_y, 0.0f);
+    glTranslatef(position_stone_x ,position_stone_y1, 0.0f);
      //circle
     drawCircle(0.0f,-.225f , .08f);
 
     glPopMatrix();
+
+
+
+    glPushMatrix();
+    glColor3ub(255,202,24);
+
+    position_stone_x = position ;
+    glTranslatef(position_stone_x ,position_stone_y2, 0.0f);
+     //circle
+    drawCircle(0.0f,-.225f , .08f);
+
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glColor3ub(255,202,24);
+
+    position_stone_x = position ;
+    glTranslatef(position_stone_x ,position_stone_y3, 0.0f);
+     //circle
+    drawCircle(0.0f,-.225f , .08f);
+
+    glPopMatrix();
+
+
+
 
 
 
