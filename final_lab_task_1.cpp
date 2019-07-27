@@ -4,7 +4,8 @@
 #include <GL/glut.h>
 #include<bits/stdc++.h>
 #define PI acos(-1.0)
-
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 #include<iostream>
 
 using namespace std;
@@ -22,13 +23,22 @@ GLfloat position_stone_x = 0.0f;
 GLfloat position_stone_y = 0.0f;
 GLfloat speed_stone = 0.0f;
 
+GLfloat random_ball_position_y1 = 0.0f ;
+GLfloat random_ball_position_y2 = 0.0f ;
+GLfloat random_ball_position_y3 = 0.0f ;
+
 bool up_click_check = false ;
 
 
 
 void update(int value) {
 
-    if(position > 1.0){
+
+
+
+
+
+    if(position > 1.4){
         position = -1.2f;
     }
 
@@ -41,6 +51,32 @@ void update(int value) {
       up_click_check = false ;
       position_stone_y = 0.0f ;
     }
+
+
+    random_ball_position_y1 -=.1f;
+
+    if(random_ball_position_y1<-2.0f){
+
+        float i = rand() % 9 + 1 ;
+        float randValue =  i/10 ;
+
+        random_ball_position_y1 = 1.0f+randValue;
+    }
+
+    random_ball_position_y2 -=.1f;
+
+    if(random_ball_position_y2<-2.0f){
+        random_ball_position_y2 = 1.0f+randValue;
+    }
+
+    random_ball_position_y3 -=.1f;
+
+    if(random_ball_position_y3<-2.0f){
+        random_ball_position_y3 = 1.0f+randValue;
+    }
+
+
+
 
 
 
@@ -125,7 +161,7 @@ void catchKey(int key, int x, int y)
 
         up_click_check = true ;
 
-        
+
         //ball_click = false ;
         //position_stone= 0.2f ;
         printf("Up key is pressed\n");
@@ -166,8 +202,56 @@ void display() {
 
 
 
-   
+  /* initialize random seed: */
+  //srand (time(NULL));
 
+  /* generate secret number between 1 and 10: */
+
+
+
+
+    //random ball 1
+
+    glPushMatrix();
+    
+    position_stone_x = position ;
+    glTranslatef(0 ,random_ball_position_y1, 0.0f);
+     //circle
+    drawCircle(0.1f, 1.0f+iSecret , .08f);
+
+    glPopMatrix();
+
+
+
+    //random ball 2
+
+    glPushMatrix();
+    position_stone_x = position ;
+    glTranslatef(0 ,random_ball_position_y2 , 0.0f);
+     //circle
+    drawCircle(0.4f, 1.0f+iSecret , .08f);
+
+    glPopMatrix();
+
+
+    //random ball 3
+
+    glPushMatrix();
+    position_stone_x = position ;
+    glTranslatef(0 , random_ball_position_y3 , 0.0f);
+     //circle
+    drawCircle(0.9f, 1.0f+iSecret , .08f);
+
+    glPopMatrix();
+
+
+
+
+
+
+
+
+   //ball that will hit the target
 
     glPushMatrix();
     position_stone_x = position ;
