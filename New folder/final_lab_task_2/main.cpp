@@ -71,6 +71,24 @@ void display() {
    glEnd();
 
 
+
+   glBegin(GL_POLYGON);
+      glColor3ub(255,63,0);
+      glVertex2f( 0.1f, -0.7f);
+      glVertex2f( 0.0f,  -.9f);
+      glVertex2f(-0.1f, -0.7f);
+
+      glVertex2f(0.06f, -0.6f);
+      glVertex2f(-0.06f, -0.6f);
+
+
+      glVertex2f(-0.1f, -0.7f);
+   glEnd();
+
+
+
+
+
    glBegin(GL_POLYGON);
       glColor3ub(255,208,0);
       glVertex2f( 0.07f, -0.7f);
@@ -80,7 +98,6 @@ void display() {
       glVertex2f(-0.06f, -0.6f);
       glVertex2f(-0.07f, -0.7f);
    glEnd();
-
 
 
 
