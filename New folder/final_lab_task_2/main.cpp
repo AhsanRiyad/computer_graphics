@@ -2,10 +2,14 @@
 
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include<bits/stdc++.h>
+#define PI acos(-1.0)
 
 
 GLfloat position = 0.0f;
-GLfloat speed = 0.1f;
+GLfloat speed = 5.0f;
+float angle=45.0;
+
 
 void update(int value) {
 
@@ -55,12 +59,38 @@ glutPostRedisplay();
 }
 
 
+void drawCircle(float x,float y,float radius)
+{
+	int i;
+	int lineAmount = 100;
+	GLfloat twicePi = 2.0f * PI;
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(x,y);
+
+    for(i = 0; i <= lineAmount;i++)
+    {
+        float tmpx=x + (radius * cos(i *  twicePi / lineAmount));
+        float tmpy=y + (radius* sin(i * twicePi / lineAmount));
+        glVertex2f(tmpx,tmpy);
+    }
+	glEnd();
+}
+
+
+
 void display() {
    glClear(GL_COLOR_BUFFER_BIT);
    glLoadIdentity();
 
 
 
+
+
+    //circle
+ drawCircle(-.00f,-.225f , .08f );
+
+
+   //first quads
 
  glBegin(GL_QUADS);
       glColor3ub(204,127,50);
@@ -71,6 +101,50 @@ void display() {
    glEnd();
 
 
+
+
+   //first lej
+
+    glBegin(GL_TRIANGLES);
+      glColor3ub(255,63,0);
+      glVertex2f( -0.125f, -0.4f);
+      glVertex2f( -0.06f,  -0.4f);
+      glVertex2f(-0.06f, -0.3f);
+   glEnd();
+
+
+
+
+
+    glBegin(GL_TRIANGLES);
+      glColor3ub(255,63,0);
+      glVertex2f( 0.125f, -0.4f);
+      glVertex2f( 0.06f,  -0.4f);
+      glVertex2f(0.06f, -0.3f);
+   glEnd();
+
+
+
+    //second lej
+
+   glBegin(GL_TRIANGLES);
+      glColor3ub(255,63,0);
+      glVertex2f( -0.1f, -0.6f);
+      glVertex2f( -0.06f,  -0.6f);
+      glVertex2f(-0.06f, -0.5f);
+   glEnd();
+
+
+   glBegin(GL_TRIANGLES);
+      glColor3ub(255,63,0);
+      glVertex2f( 0.1f, -0.6f);
+      glVertex2f( 0.06f,  -0.6f);
+      glVertex2f(0.06f, -0.5f);
+   glEnd();
+
+
+
+    //first triangle under quads
 
    glBegin(GL_POLYGON);
       glColor3ub(255,63,0);
@@ -88,6 +162,7 @@ void display() {
 
 
 
+    //second triangle under quads
 
    glBegin(GL_POLYGON);
       glColor3ub(255,208,0);
