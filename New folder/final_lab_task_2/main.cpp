@@ -24,6 +24,8 @@ GLfloat speed_stone = 0.0f;
 
 bool up_click_check = false ;
 
+
+
 void update(int value) {
 
     if(position > 1.0){
@@ -31,7 +33,13 @@ void update(int value) {
     }
 
     if(up_click_check == true){
-      position_stone_y += .1f ;
+      position_stone_y += .05f ;
+    }
+
+
+    if(position_stone_y > 1.0 ){
+      up_click_check = false ;
+      position_stone_y = 0.0f ;
     }
 
 
@@ -116,6 +124,9 @@ void catchKey(int key, int x, int y)
     else if(key == GLUT_KEY_UP){
 
         up_click_check = true ;
+
+
+        //ball_click = false ;
         //position_stone= 0.2f ;
         printf("Up key is pressed\n");
     }
@@ -152,6 +163,9 @@ void display() {
 
    glClear(GL_COLOR_BUFFER_BIT);
    glLoadIdentity();
+
+
+
 
 
 
@@ -254,9 +268,6 @@ void display() {
       glVertex2f(-0.06f, -0.6f);
       glVertex2f(-0.07f, -0.7f);
    glEnd();
-
-
-
 
 
 
