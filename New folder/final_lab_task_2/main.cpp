@@ -47,10 +47,6 @@ GLfloat xpos4 = -0.3f ;
 void update(int value) {
 
 
-
-
-
-
     if(position > 1.4){
         position = -1.2f;
     }
@@ -58,7 +54,6 @@ void update(int value) {
     if(up_click_check == true){
       position_stone_y1 += .05f ;
     }
-
 
     if(position_stone_y1 > 1.0 ){
       up_click_check = false ;
@@ -72,11 +67,9 @@ void update(int value) {
     }*/
 
 
-    random_ball_position_y1 -=.1f;
+    random_ball_position_y1 -=0.1f;
 
     if(random_ball_position_y1<-2.0f){
-
-
 
         float i = rand() % 9 + 1 ;
         float randValue =  i/10 ;
@@ -239,20 +232,14 @@ void drawCircle(float x,float y,float radius)
 void display() {
 
 
-
-
-
    glClear(GL_COLOR_BUFFER_BIT);
    glLoadIdentity();
-
 
 
   /* initialize random seed: */
   //srand (time(NULL));
 
   /* generate secret number between 1 and 10: */
-
-
 
 
     //random ball 1
@@ -367,7 +354,8 @@ void display() {
    //first quads
 
  glBegin(GL_QUADS);
-      glColor3ub(204,127,50);
+      // glColor3ub(204,127,50);
+      glColor4f(0.8,0.498,0.196, 1);
       glVertex2f(-0.06f, -0.6f);
       glVertex2f( 0.06f, -0.6f);
       glVertex2f( 0.06f,  -0.3f);
@@ -464,6 +452,9 @@ int main(int argc, char** argv) {
    glutInitWindowSize(720, 720);
    glutInitWindowPosition(50, 50);
    glutCreateWindow("Basic Animation");
+   glutInitDisplayMode(GLUT_SINGLE|GLUT_RGBA);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   glEnable( GL_BLEND );
    glutDisplayFunc(display);
    init();
    glutKeyboardFunc(handleKeypress);
