@@ -74,7 +74,7 @@ void update(int value) {
     if(night_mode_key==1){
 
     if(night_mode_variable<1.1){
-    night_mode_variable += 0.1f;  
+    night_mode_variable += 0.1f;
     }
 
     }
@@ -82,12 +82,12 @@ void update(int value) {
     if(day_mode_key==1){
 
     if(night_mode_variable>0){
-    night_mode_variable -= 0.1f;  
+    night_mode_variable -= 0.1f;
     }
 
     }
 
-    
+
 
     //Riyad's code ends
 
@@ -108,11 +108,11 @@ void handleKeypress(unsigned char key, int x, int y) {
 
 case 'n':
     night_mode_key = 1 ;
-    day_mode_key = 0 ; 
+    day_mode_key = 0 ;
     break;
 case 'd':
     day_mode_key = 1;
-    night_mode_key = 0 ; 
+    night_mode_key = 0 ;
     break;
 
 
@@ -340,7 +340,7 @@ void drawBoat1() //boat1
 
 	//Riyad's code ends
 
-    
+
     glVertex2f(-0.833f, -0.66f);
     glVertex2f(-0.33f, -0.66f);
      glVertex2f(-0.25f, -0.583f);
@@ -1262,7 +1262,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(handleKeypress);
 
     //Riyad's code ends
-    
+
     init();
     glutTimerFunc(1000, update, 0);
     glutMainLoop();
