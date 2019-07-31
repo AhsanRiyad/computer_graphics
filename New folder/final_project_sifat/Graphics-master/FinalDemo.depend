@@ -239,3 +239,11 @@
 	<GL/glu.h>
 	<stdlib.h>
 
+1564543334 source:c:\users\riyad\desktop\new folder\computer_graphics\new folder\final_project_sifat\graphics-master\main.cpp
+	<bits/stdc++.h>
+	<cstdio>
+	<GL/gl.h>
+	<GL/glut.h>
+	<windows.h>
+	<mmsystem.h>
+

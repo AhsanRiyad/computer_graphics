@@ -1,3 +1,8 @@
+//Riyad's code starts
+//Riyad's code ends
+
+
+
 #include<bits/stdc++.h>
 #define PI acos(-1.0)
 #include<cstdio>
@@ -33,6 +38,26 @@ float sky_g=0.745f;
 float sky_b=1.0f;
 
 
+
+
+
+//Riyad's code starts
+//Night mode
+
+GLfloat night_mode_variable = 0.0f;
+GLfloat night_mode_variable_speed = 0.0f;
+int night_mode_key = 0;
+int day_mode_key = 0;
+
+
+//Riyad's code ends
+
+
+
+
+
+
+
 void update(int value) {
     positionCloud1 += speedCloud1;
     if(positionCloud1 > 1.8){
@@ -58,6 +83,42 @@ void update(int value) {
     if(positionBus < -1.875){
         positionBus = 0.5f;
     }
+
+
+
+
+
+    //Riyad's code starts
+    //Night mode
+
+
+    if(night_mode_key==1){
+
+    if(night_mode_variable<1.1){
+    night_mode_variable += 0.1f;
+    }
+
+    }
+
+    if(day_mode_key==1){
+
+    if(night_mode_variable>0){
+    night_mode_variable -= 0.1f;
+    }
+
+    }
+
+
+
+    //Riyad's code ends
+
+
+
+
+
+
+
+
 
 	glutPostRedisplay();
 
@@ -320,7 +381,16 @@ void drawCloud3(float x,float y,float radius) //cloud3
 void drawBoat1() //boat1
 {
     glBegin(GL_POLYGON);//boat2
-    glColor3f(0.4,0.0 , 0.0);
+
+
+	//Riyad's code starts
+    glColor4f(0.4,0.0 , 0.0 , night_mode_variable);
+
+	//Riyad's code ends
+
+
+
+
     glVertex2f(-0.833f, -0.66f);
     glVertex2f(-0.33f, -0.66f);
      glVertex2f(-0.25f, -0.583f);
@@ -1218,6 +1288,29 @@ void display() {
 
 
 void handleKeypress(unsigned char key, int x, int y){
+
+
+
+     switch (key) {
+
+case 'n':
+    night_mode_key = 1 ;
+    day_mode_key = 0 ;
+    break;
+case 'd':
+    day_mode_key = 1;
+    night_mode_key = 0 ;
+    break;
+
+
+glutPostRedisplay();
+
+
+  }
+
+
+
+
     if(key=='r'||key=='R')
     {
         rainday=true;
@@ -1240,6 +1333,11 @@ void handleKeypress(unsigned char key, int x, int y){
         sky_g=0.745f;
         sky_b=1.0f;
     }
+
+
+
+
+
 }
 
 int main(int argc, char** argv)
