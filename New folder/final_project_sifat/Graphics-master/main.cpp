@@ -38,13 +38,14 @@ float sky_g=0.745f;
 float sky_b=1.0f;
 
 
+GLfloat star_intensity = 1.0f;
 
 
 
 //Riyad's code starts
 //Night mode
 
-GLfloat night_mode_variable = 0.0f;
+GLfloat night_mode_variable = 1.0f;
 GLfloat night_mode_variable_speed = 0.0f;
 int night_mode_key = 0;
 int day_mode_key = 0;
@@ -52,8 +53,14 @@ int day_mode_key = 0;
 
 
 GLfloat moon_intensity = 0.0f;
+int night_mode = 0;
+int day_mode = 1 ;
 
 
+GLfloat pentagon_window_color_r = 1.0;
+GLfloat pentagon_window_color_g = 1.0;
+GLfloat pentagon_window_color_b = 1.0;
+GLfloat pentagon_window_color_intesity = 1.0;
 
 //Riyad's code ends
 
@@ -98,7 +105,7 @@ void update(int value) {
     if(night_mode_key==1){
 
     if(night_mode_variable<1.1){
-    night_mode_variable += 0.1f;
+    //night_mode_variable += 0.1f;
     }
 
     }
@@ -106,9 +113,26 @@ void update(int value) {
     if(day_mode_key==1){
 
     if(night_mode_variable>0){
-    night_mode_variable -= 0.1f;
+    //night_mode_variable -= 0.1f;
     }
 
+
+
+
+
+
+    }
+
+
+
+
+    if(night_mode == 1 && star_intensity == 1.0f ){
+    	star_intensity = 0.0f;
+
+    	//cout
+
+    }else if(night_mode == 1 && star_intensity == 0.0f){
+    	star_intensity = 1.0f;
     }
     //Riyad's code ends
 
@@ -212,11 +236,28 @@ void drawSun_night_moon()
 
 
 
+void drawCircle_star(float x, float y, float radius)
+{
+    glBegin(GL_TRIANGLE_FAN);
+
+    int i;
+	int lineAmount = 100; //# of triangles used to draw circle
+
+	//GLfloat radius = 0.8f; //radius
+	GLfloat twicePi = 2.0f * PI;
+		for(i = 0; i <= lineAmount;i++) {
+			glVertex2f(
+			    x + (radius * cos(i *  twicePi / lineAmount)),
+			    y + (radius* sin(i * twicePi / lineAmount))
+			);
+		}
+	glEnd();
+}
 
 
 
 
-void drawCircle(float x,float y,float radius)
+void drawCircle(float x, float y, float radius)
 {
     glBegin(GL_TRIANGLE_FAN);
 	glColor3ub(255, 255, 255);
@@ -658,9 +699,15 @@ float x=.58f;float y=-0.18; float radius =.025f;       //first wheel
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     //glLoadIdentity();
+
+
+    if(day_mode==1){
+
+
     glClearColor(sky_r, sky_g, sky_b, 1.0f); // Set background color to black and opaque
 	//glClear(GL_COLOR_BUFFER_BIT);
 	//gluOrtho2D(-2.0,2.0,-2.0,2.0);
+
 
     glPushMatrix(); //Sun
         glTranslatef(0.8, 0.8, 0.0);
@@ -1316,6 +1363,680 @@ void display() {
 	glPopMatrix();
 
 
+
+	}
+
+
+
+	//Riyad's code starts
+	//night mode code
+
+
+	if(night_mode==1){
+	glClearColor(sky_r, sky_g, sky_b, 1.0f); // Set background color to black and opaque
+	//glClear(GL_COLOR_BUFFER_BIT);
+	//gluOrtho2D(-2.0,2.0,-2.0,2.0);
+
+
+	//Riyad's code starts
+
+	glPushMatrix(); //Sun
+        glTranslatef(0.8, 0.8, 0.0);
+        glColor4f(1.0,1.0,1.0,moon_intensity);
+        drawSun_night_moon();
+	glPopMatrix();
+
+	//Riyad's code ends
+
+
+		//glPointSize(10.0);
+	//glColor3f(1.0,1.0 , 1.0);
+	glColor4f(1.0, 1.0, 1.0,star_intensity);
+	drawCircle_star(-0.8f , 0.9f , 0.01f);
+	drawCircle_star(-0.9f , 0.9f , 0.01f);
+	drawCircle_star(-0.7f , 0.8f , 0.01f);
+	drawCircle_star(-0.6f , 0.85f , 0.01f);
+
+	/*glBegin(GL_TRIANGLES);
+	glVertex3f();
+	glVertex2f(-0.8,-.9);
+	glVertex2f(0.82,-.9);
+	glVertex2f(0.83,0.88);
+	glVertex2f(-1.0,0.0);
+	glEnd();*/
+
+
+	glBegin(GL_QUADS);//road
+	glColor3f(0.698,0.745 , 0.7098);
+	glVertex2f(-1.0,-.3);
+	glVertex2f(1.0,-.3);
+	glVertex2f(1.0,0.0);
+	glVertex2f(-1.0,0.0);
+	glEnd();
+	glBegin(GL_QUADS);//road black
+	glColor3ub(32,32,32);
+	glVertex2f(-1.0,-0.0);
+	glVertex2f(-1.0,-.15);
+	glVertex2f(1.0,-.15);
+	glVertex2f(1.0,-0.0);
+	glEnd();
+
+	glBegin(GL_QUADS);//road black
+	glColor3ub(32,32,32);
+	glVertex2f(-1.0,-0.18);
+	glVertex2f(-1.0,-.35);
+	glVertex2f(1.0,-.35);
+	glVertex2f(1.0,-0.18);
+	glEnd();
+
+	 ////Border///
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.2,0.098 , 0.0);
+    glVertex2f(-1.0f, -0.33f);
+    glVertex2f(1.0f, -0.33f);
+    glVertex2f(1.0f, -0.416f);
+    glVertex2f(-1.0f, -0.416f);
+    glEnd();
+    glBegin(GL_POLYGON);
+    glColor3f(0.0,0.0 , 0.0);
+    glVertex2f(-1.0f, -0.35f);
+    glVertex2f(1.0f, -0.35f);
+    glVertex2f(1.0f, -0.33f);
+    glVertex2f(-1.0f, -0.33f);
+    glEnd();
+
+	glBegin(GL_QUADS);//water
+	glColor3ub(65, 108, 198);
+	glVertex2f(-1.0,-1.0);
+	glVertex2f(1.0,-1.0);
+	glVertex2f(1.0,-.3);
+	glVertex2f(-1.0,-.3);
+	glEnd();
+
+	glPushMatrix(); //plane
+        glTranslatef(positionPlane, 0.0f, 0.0f);
+        drawPlane();
+	glPopMatrix();
+
+	glBegin(GL_QUADS);// petronas tower lower left
+	glColor3ub(163, 21, 21);
+	glVertex2f(-.35,0.0);
+	glVertex2f(-.30,0.0);
+	glVertex2f(-.30,.30);
+	glVertex2f(-.35,.30);
+	glEnd();
+
+	glBegin(GL_QUADS);// petronas tower lower left ,window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+	glVertex2f(-.335,0.10);
+	glVertex2f(-.315,0.10);
+	glVertex2f(-.315,.15);
+	glVertex2f(-.335,.15);
+	glEnd();
+
+	glBegin(GL_QUADS);// petronas tower lower left ,window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.335,0.18);
+	glVertex2f(-.315,0.18);
+	glVertex2f(-.315,.23);
+	glVertex2f(-.335,.23);
+	glEnd();
+
+	glBegin(GL_QUADS);// petronas tower lower right
+	glColor3ub(163, 21, 21);
+	glVertex2f(-.22,0.0);
+	glVertex2f(-.17,0.0);
+	glVertex2f(-.17,.30);
+	glVertex2f(-.22,.30);
+	glEnd();
+	glBegin(GL_QUADS);// petronas tower lower right ,window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.205,0.10);
+	glVertex2f(-.185,0.10);
+	glVertex2f(-.185,.15);
+	glVertex2f(-.205,.15);
+	glEnd();
+	glBegin(GL_QUADS);// petronas tower lower right ,window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.205,0.18);
+	glVertex2f(-.185,0.18);
+	glVertex2f(-.185,.23);
+	glVertex2f(-.205,.23);
+	glEnd();
+	glBegin(GL_QUADS);// petronas tower lower middle
+	glColor3ub(25,0,51);
+	glVertex2f(-.30,.15);
+	glVertex2f(-.22,0.15);
+	glVertex2f(-.22,.20);
+	glVertex2f(-.30,.20);
+	glEnd();
+
+
+	glBegin(GL_QUADS);// petronas tower upper left
+	glColor3ub(163, 21, 21);
+	glVertex2f(-.345,.30);
+	glVertex2f(-.305,0.30);
+	glVertex2f(-.305,.45);
+	glVertex2f(-.345,.45);
+	glEnd();
+
+	glBegin(GL_QUADS);// petronas tower upper right
+	glColor3ub(163, 21, 21);
+	glVertex2f(-.215,.30);
+	glVertex2f(-.175,0.30);
+	glVertex2f(-.175,.45);
+	glVertex2f(-.215,.45);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);//petronas left triangle
+	glColor3ub(25,0,51);
+	glVertex2f(-.345,.45);
+	glVertex2f(-.305,.45);
+	glVertex2f(-.325,.75);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);//petronas right triangle
+	glColor3ub(25,0,51);
+	glVertex2f(-.215,.45);
+	glVertex2f(-.175,.45);
+	glVertex2f(-.195,.75);
+	glEnd();
+
+	glBegin(GL_QUADS);//1st building
+	glColor3ub(125, 7, 2);
+	glVertex2f(-1.0,0.0);
+	glVertex2f(-.92,0.0);
+	glVertex2f(-.92,.2);
+	glVertex2f(-1.0,.2);
+	glEnd();
+
+	glBegin(GL_QUADS);//1st building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.96,0.07);
+	glVertex2f(-.94,0.07);
+	glVertex2f(-.94,.1);
+	glVertex2f(-.96,.1);
+	glEnd();
+	glBegin(GL_QUADS);//1st building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.96,0.12);
+	glVertex2f(-.94,0.12);
+	glVertex2f(-.94,.15);
+	glVertex2f(-.96,.15);
+	glEnd();
+
+	glBegin(GL_QUADS);//2nd building
+	glColor3ub(128, 5, 166);
+	glVertex2f(-.91,0.0);
+	glVertex2f(-.85,0.0);
+	glVertex2f(-.85,.25);
+	glVertex2f(-.91,.25);
+	glEnd();
+
+	glBegin(GL_QUADS);//2nd building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.89,0.07);
+	glVertex2f(-.87,0.07);
+	glVertex2f(-.87,.1);
+	glVertex2f(-.89,.1);
+	glEnd();
+
+	glBegin(GL_QUADS);//2nd building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.89,0.12);
+	glVertex2f(-.87,0.12);
+	glVertex2f(-.87,.15);
+	glVertex2f(-.89,.15);
+	glEnd();
+
+	glBegin(GL_QUADS);//2nd building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.89,0.18);
+	glVertex2f(-.87,0.18);
+	glVertex2f(-.87,.21);
+	glVertex2f(-.89,.21);
+	glEnd();
+
+	glBegin(GL_QUADS);//watch tower
+	glColor3ub(0,102,51);
+	glVertex2f(-.83,0.0);
+	glVertex2f(-.80,0.0);
+	glVertex2f(-.80,.15);
+	glVertex2f(-.83,.15);
+	glEnd();
+
+
+	glBegin(GL_TRIANGLES);
+	glColor3ub(64,64,64);
+	glVertex2f(-.83,.15);
+	glVertex2f(-.80,.15);
+	glVertex2f(-.815,.25);
+	glEnd();
+
+
+
+	drawCircle(-.815f,0.12,0.00013);
+	//drawCircle(-.915f,0.2,0.00013);
+
+	//glColor3f(1.0, 1.0, 1.0);
+
+
+	/*glBegin(GL_POLYGON);
+
+	glVertex3f(-0.60, 0.77, 0); // <--- -0.60 instead of -0.68
+	glVertex3f(-0.64, 0.77, 0); // <--- -0.68 instead of -0.60
+	glVertex3f(-0.68, 0.68, 0);
+	glVertex3f(-0.62, 0.63, 0);
+	glVertex3f(-0.60, 0.68, 0);
+
+	glEnd();*/
+
+
+
+
+	glBegin(GL_QUADS);//3rd building
+	glColor3ub(128, 4, 55);
+	glVertex2f(-.79,0.0);
+	glVertex2f(-.74,0.0);
+	glVertex2f(-.74,.17);
+	glVertex2f(-.79,.17);
+	glEnd();
+
+	glBegin(GL_QUADS);//3rd building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.77,0.05);
+	glVertex2f(-.75,0.05);
+	glVertex2f(-.75,.08);
+	glVertex2f(-.77,.08);
+	glEnd();
+
+	glBegin(GL_QUADS);//3rd building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.77,0.09);
+	glVertex2f(-.75,0.09);
+	glVertex2f(-.75,.12);
+	glVertex2f(-.77,.12);
+	glEnd();
+
+	glBegin(GL_QUADS);//  left 1st building
+	glColor3ub(72, 112, 29);
+	glVertex2f(-.42,0.0);
+	glVertex2f(-.37,0.0);
+	glVertex2f(-.37,.30);
+	glVertex2f(-.42,.30);
+	glEnd();
+	glBegin(GL_LINES);
+	glColor3ub(255,255,255);
+	glVertex2f(-.42,0.30);
+	glVertex2f(-.37,0.30);
+	glEnd();
+	glBegin(GL_QUADS);//  left 1st building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.405,0.10);
+	glVertex2f(-.385,0.10);
+	glVertex2f(-.385,.15);
+	glVertex2f(-.405,.15);
+	glEnd();
+	glBegin(GL_QUADS);//  left 1st building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.405,0.18);
+	glVertex2f(-.385,0.18);
+	glVertex2f(-.385,.23);
+	glVertex2f(-.405,.23);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);//left triangle
+	glColor3ub(64,64,64);
+	glVertex2f(-.42,.30);
+	glVertex2f(-.37,.30);
+	glVertex2f(-.395,.48);
+	glEnd();
+
+	glBegin(GL_QUADS);//  left 2nd building(left)
+	glColor3ub(148, 11, 212);
+	glVertex2f(-.58,0.0);
+	glVertex2f(-.53,0.0);
+	glVertex2f(-.53,.30);
+	glVertex2f(-.58,.28);
+	glEnd();
+	glBegin(GL_QUADS);//  left 2nd building(left) window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.565,0.10);
+	glVertex2f(-.545,0.10);
+	glVertex2f(-.545,.15);
+	glVertex2f(-.565,.15);
+	glEnd();
+	glBegin(GL_QUADS);//  left 2nd building(left) window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.565,0.18);
+	glVertex2f(-.545,0.18);
+	glVertex2f(-.545,.23);
+	glVertex2f(-.565,.23);
+	glEnd();
+
+	glBegin(GL_QUADS);//  left 2nd building(left)up
+	glColor3ub(64,64,64);
+	glVertex2f(-.57,0.284);
+	glVertex2f(-.53,0.30);
+	glVertex2f(-.53,.35);
+	glVertex2f(-.57,.33);
+	glEnd();
+
+	glBegin(GL_QUADS);//  left 2nd building(right)
+	glColor3ub(148, 11, 212);
+	glVertex2f(-.53,0.0);
+	glVertex2f(-.48,0.0);
+	glVertex2f(-.48,.28);
+	glVertex2f(-.53,.30);
+	glEnd();
+	glBegin(GL_QUADS);//  left 2nd building(right) window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.515,0.10);
+	glVertex2f(-.495,0.10);
+	glVertex2f(-.495,.15);
+	glVertex2f(-.515,.15);
+	glEnd();
+	glBegin(GL_QUADS);//  left 2nd building(right) window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(-.515,0.18);
+	glVertex2f(-.495,0.18);
+	glVertex2f(-.495,.23);
+	glVertex2f(-.515,.23);
+	glEnd();
+	glBegin(GL_QUADS);//  left 2nd building(right)up
+	glColor3ub(64,64,64);
+	glVertex2f(-.53,0.30);
+	glVertex2f(-.49,0.284);
+	glVertex2f(-.49,.33);
+	glVertex2f(-.53,.35);
+	glEnd();
+
+
+	glBegin(GL_QUADS);//  right 1nd building
+	glColor3ub(3, 37, 82);
+	glVertex2f(0.0,0.0);
+	glVertex2f(.05,0.0);
+	glVertex2f(.05,.20);
+	glVertex2f(0.0,.17);
+	glEnd();
+	glBegin(GL_QUADS);//  right 1nd building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.0205,0.10);
+	glVertex2f(.045,0.10);
+	glVertex2f(.045,.15);
+	glVertex2f(0.0205,.15);
+	glEnd();
+
+    glBegin(GL_QUADS);//  right 1nd building
+	glColor3ub(3, 65, 82);
+	glVertex2f(0.05,0.0);
+	glVertex2f(.10,0.0);
+	glVertex2f(.10,.20);
+	glVertex2f(0.05,.20);
+	glEnd();
+	glBegin(GL_QUADS);//  right 1nd building window
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.075,0.07);
+	glVertex2f(.095,0.07);
+	glVertex2f(.095,.12);
+	glVertex2f(0.075,.12);
+	glEnd();
+	glBegin(GL_QUADS);//  right 1nd building window
+	glColor3ub(128, 128, 128);
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.075,0.15);
+	glVertex2f(.095,0.15);
+	glVertex2f(.095,.20);
+	glVertex2f(0.075,.20);
+	glEnd();
+
+	glBegin(GL_QUADS);//  right 1nd building
+	glColor3ub(3, 65, 82);
+	glVertex2f(0.10,0.0);
+	glVertex2f(.15,0.0);
+	glVertex2f(.15,.20);
+	glVertex2f(0.10,.20);
+	glEnd();
+
+	glBegin(GL_QUADS);//  right 1nd building
+	glColor3ub(3, 37, 82);
+	glVertex2f(0.15,0.0);
+	glVertex2f(.20,0.0);
+	glVertex2f(.20,.17);
+	glVertex2f(0.15,.20);
+	glEnd();
+
+	glBegin(GL_QUADS);// upper right 1nd building
+	glColor3ub(3, 65, 82);
+	glVertex2f(0.05,0.20);
+	glVertex2f(.10,0.20);
+	glVertex2f(.10,.38);
+	glVertex2f(0.05,.38);
+	glEnd();
+
+	glBegin(GL_QUADS);// upper right 1nd building
+	glColor3ub(3, 65, 82);
+	glVertex2f(0.10,0.20);
+	glVertex2f(.15,0.20);
+	glVertex2f(.15,.38);
+	glVertex2f(0.10,.38);
+	glEnd();
+	glBegin(GL_LINES);
+	glColor3ub(255,255,255);
+	glVertex2f(.10,0.20);
+	glVertex2f(0.10,.38);
+	glEnd();
+
+    glBegin(GL_QUADS);//  right 3rd building
+	glColor3ub(24, 82, 3);
+	glVertex2f(0.25,0.0);
+	glVertex2f(.30,0.0);
+	glVertex2f(.30,.20);
+	glVertex2f(0.25,.20);
+	glEnd();
+	glBegin(GL_QUADS);//  right 3rd building window
+	glColor3ub(128, 128, 128);
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.265,0.10);
+	glVertex2f(.285,0.10);
+	glVertex2f(.285,.15);
+	glVertex2f(0.265,.15);
+	glEnd();
+	glBegin(GL_QUADS);//  right 3rd building window
+	glColor3ub(128, 128, 128);
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.265,0.05);
+	glVertex2f(.285,0.05);
+	glVertex2f(.285,.08);
+	glVertex2f(0.265,.08);
+	glEnd();
+
+	glBegin(GL_QUADS);//  right 4th building
+	glColor3ub(204, 0, 82);
+	glVertex2f(0.35,0.0);
+	glVertex2f(.40,0.0);
+	glVertex2f(.40,.40);
+	glVertex2f(0.35,.35);
+	glEnd();
+	glBegin(GL_QUADS);//  right 4th building window
+	glColor3ub(128, 128, 128);
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.365,0.10);
+	glVertex2f(.385,0.10);
+	glVertex2f(.385,.15);
+	glVertex2f(0.365,.15);
+	glEnd();
+	glBegin(GL_QUADS);//  right 4th building window
+	glColor3ub(128, 128, 128);
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.365,0.18);
+	glVertex2f(.385,0.18);
+	glVertex2f(.385,.23);
+	glVertex2f(0.365,.23);
+	glEnd();
+
+	glBegin(GL_QUADS);//  right 5th building
+	glColor3ub(102, 0, 51);
+	glVertex2f(0.45,0.0);
+	glVertex2f(.50,0.0);
+	glVertex2f(.50,.25);
+	glVertex2f(0.45,.17);
+	glEnd();
+	glBegin(GL_QUADS);//  right 5th building window
+	glColor3ub(128, 128, 128);
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.465,0.10);
+	glVertex2f(.485,0.10);
+	glVertex2f(.485,.12);
+	glVertex2f(0.465,.12);
+	glEnd();
+	glBegin(GL_QUADS);//  right 5th building window
+	glColor3ub(128, 128, 128);
+	glColor4f(pentagon_window_color_r, pentagon_window_color_g, pentagon_window_color_b , pentagon_window_color_intesity);
+
+	glVertex2f(0.465,0.14);
+	glVertex2f(.485,0.14);
+	glVertex2f(.485,.16);
+	glVertex2f(0.465,.16);
+	glEnd();
+
+	glBegin(GL_QUADS);//  tree 1
+	glColor3ub(64,64,64);
+	glVertex2f(0.80,0.0);
+	glVertex2f(.81,0.0);
+	glVertex2f(.81,.10);
+	glVertex2f(0.80,.10);
+	glEnd();
+	drawTree(.805,0.11,0.03);
+
+	glBegin(GL_QUADS);//  tree 2
+	glColor3ub(64,64,64);
+	glVertex2f(0.83,0.0);
+	glVertex2f(.84,0.0);
+	glVertex2f(.84,.07);
+	glVertex2f(0.83,.07);
+	glEnd();
+	drawTree(.835,0.07,.02);
+
+	glBegin(GL_QUADS);//  tree 3
+	glColor3ub(64,64,64);
+	glVertex2f(0.85,0.0);
+	glVertex2f(.86,0.0);
+	glVertex2f(.86,.07);
+	glVertex2f(0.85,.07);
+	glEnd();
+	drawTree(.855f,0.08,0.02);
+
+	glBegin(GL_QUADS);//  tree 4
+	glColor3ub(64,64,64);
+	glVertex2f(0.89,0.0);
+	glVertex2f(.90,0.0);
+	glVertex2f(.90,.07);
+	glVertex2f(0.89,.07);
+	glEnd();
+	drawTree(.895,0.08,0.03);
+
+	glBegin(GL_QUADS);//  tree 5
+	glColor3ub(64,64,64);
+	glVertex2f(0.92,0.0);
+	glVertex2f(.93,0.0);
+	glVertex2f(.93,.07);
+	glVertex2f(0.92,.07);
+	glEnd();
+	drawTree(.925,0.08,0.03);
+
+	glBegin(GL_QUADS);//  tree -1
+	glColor3ub(64,64,64);
+	glVertex2f(-0.72,0.0);
+	glVertex2f(-.71,0.0);
+	glVertex2f(-.71,.04);
+	glVertex2f(-0.72,.04);
+	glEnd();
+	drawTree(-.7155,0.05,0.015);
+
+	glBegin(GL_QUADS);//  tree -2
+	glColor3ub(64,64,64);
+	glVertex2f(-0.69,0.0);
+	glVertex2f(-.68,0.0);
+	glVertex2f(-.68,.04);
+	glVertex2f(-0.69,.04);
+	glEnd();
+	drawTree(-.685,0.05,0.020);
+
+	glBegin(GL_QUADS);//  tree -3
+	glColor3ub(64,64,64);
+	glVertex2f(-0.67,0.0);
+	glVertex2f(-.66,0.0);
+	glVertex2f(-.66,.06);
+	glVertex2f(-0.67,.06);
+	glEnd();
+	drawTree(-.665,0.07,0.025);
+
+	glBegin(GL_QUADS);//  tree -4
+	glColor3ub(64,64,64);
+	glVertex2f(-0.64,0.0);
+	glVertex2f(-.63,0.0);
+	glVertex2f(-.63,.04);
+	glVertex2f(-0.64,.04);
+	glEnd();
+	drawTree(-.635,0.05,0.020);
+
+
+	glPushMatrix();
+        glTranslatef(positionBus, 0.0f, 0.0f);
+        drawBus1();
+    glPopMatrix();
+
+	glPushMatrix(); //cloud1
+        glTranslatef(positionCloud1, 0.0f, 0.0f);
+        drawCloud1(-.97f,0.88,0.035);
+	glPopMatrix();
+
+	glPushMatrix(); //cloud2
+        glTranslatef(positionCloud2, 0.0f, 0.0f);
+        drawCloud2(-.57,0.88,0.035);
+	glPopMatrix();
+
+	glPushMatrix(); //cloud3
+        glTranslatef(positionCloud3, 0.0f, 0.0f);
+        drawCloud3(0.46,0.88,0.035);
+	glPopMatrix();
+
+	glPushMatrix(); //boat1
+        glTranslatef(positionBoat1, 0.0f, 0.0f);
+        drawBoat1();
+	glPopMatrix();
+
+
+	//Riyad's code ends
+
+	}
+
     glFlush();
     glutSwapBuffers();
 }
@@ -1336,7 +2057,8 @@ case 'n':
     moon_intensity = 1.0;
     sunrayintensity = 0.0;
 
-
+    night_mode = 1 ;
+    day_mode = 0 ;
 
     sky_r=0.172;
     sky_g=0.219;
@@ -1353,6 +2075,9 @@ case 'd':
     moon_intensity = 0.0;
     sunrayintensity = 1.0;
 
+
+    day_mode = 1;
+    night_mode = 0;
 
     sky_r=0.0f;
     sky_g=0.745f;
