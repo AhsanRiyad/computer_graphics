@@ -50,6 +50,11 @@ int night_mode_key = 0;
 int day_mode_key = 0;
 
 
+
+GLfloat moon_intensity = 0.0f;
+
+
+
 //Riyad's code ends
 
 
@@ -90,8 +95,6 @@ void update(int value) {
 
     //Riyad's code starts
     //Night mode
-
-
     if(night_mode_key==1){
 
     if(night_mode_variable<1.1){
@@ -107,16 +110,7 @@ void update(int value) {
     }
 
     }
-
-
-
     //Riyad's code ends
-
-
-
-
-
-
 
 
 
@@ -197,6 +191,29 @@ void drawSun() //sun
 	glEnd();
 	glutPostRedisplay();
 }
+
+
+void drawSun_night_moon()
+{
+    glBegin(GL_POLYGON);
+
+	for(int i=0;i<600;i++)
+	{
+		float pi=3.1416;
+		float A=(i*2*pi)/100;
+		float r=0.1;
+		float x = r * cos(A);
+		float y = r * sin(A);
+		glVertex2f(x,y);
+	}
+	glEnd();
+	glutPostRedisplay();
+}
+
+
+
+
+
 
 
 void drawCircle(float x,float y,float radius)
@@ -650,6 +667,23 @@ void display() {
         glColor4f(1.0,1.0,0.0,sunintensity);
         drawSun();
 	glPopMatrix();
+
+
+
+
+	//Riyad's code starts
+
+	glPushMatrix(); //Sun
+        glTranslatef(0.8, 0.8, 0.0);
+        glColor4f(1.0,1.0,1.0,moon_intensity);
+        drawSun_night_moon();
+	glPopMatrix();
+
+	//Riyad's code ends
+
+
+
+
 
 
 	glBegin(GL_LINES); ////Sunrays////
@@ -1296,10 +1330,34 @@ void handleKeypress(unsigned char key, int x, int y){
 case 'n':
     night_mode_key = 1 ;
     day_mode_key = 0 ;
+
+
+    sunintensity = 0.0;
+    moon_intensity = 1.0;
+    sunrayintensity = 0.0;
+
+
+
+    sky_r=0.172;
+    sky_g=0.219;
+    sky_b=0.271;
+
+
     break;
 case 'd':
     day_mode_key = 1;
     night_mode_key = 0 ;
+
+
+    sunintensity = 1.0;
+    moon_intensity = 0.0;
+    sunrayintensity = 1.0;
+
+
+    sky_r=0.0f;
+    sky_g=0.745f;
+    sky_b=1.0f;
+
     break;
 
 

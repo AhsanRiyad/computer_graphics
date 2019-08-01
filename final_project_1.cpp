@@ -1,11 +1,15 @@
 //Riyad's code starts
 //Riyad's code ends
 
+
+
 #include<bits/stdc++.h>
 #define PI acos(-1.0)
 #include<cstdio>
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include<windows.h>
+#include<mmsystem.h>
 using namespace std;
 
 GLfloat positionCloud1 = 0.0f;
@@ -25,6 +29,16 @@ GLfloat position1 = 0.0f;
 GLfloat position2 = 0.0f;
 GLfloat speed = 5.0f;
 float angle=45.0;
+bool rainday=false;
+float _rain=0.0f;
+float sunintensity=1.0f;
+float sunrayintensity=1.0f;
+float sky_r=0.0f;
+float sky_g=0.745f;
+float sky_b=1.0f;
+
+
+
 
 
 //Riyad's code starts
@@ -36,7 +50,16 @@ int night_mode_key = 0;
 int day_mode_key = 0;
 
 
+
+GLfloat moon_intensity = 0.0f;
+
+
+
 //Riyad's code ends
+
+
+
+
 
 
 
@@ -67,10 +90,11 @@ void update(int value) {
     }
 
 
+
+
+
     //Riyad's code starts
     //Night mode
-
-
     if(night_mode_key==1){
 
     if(night_mode_variable<1.1){
@@ -86,12 +110,7 @@ void update(int value) {
     }
 
     }
-
-
-
     //Riyad's code ends
-
-
 
 
 
@@ -101,37 +120,60 @@ void update(int value) {
 }
 
 
-//Riyad's code starts
-void handleKeypress(unsigned char key, int x, int y) {
-
-  switch (key) {
-
-case 'n':
-    night_mode_key = 1 ;
-    day_mode_key = 0 ;
-    break;
-case 'd':
-    day_mode_key = 1;
-    night_mode_key = 0 ;
-    break;
-
-
-glutPostRedisplay();
-
-
-  }
-}
-//Riyad's code ends
-
-
-
 
 void init()
 {
    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
+///Rain Add
+void Rain(int value)
+{
+    if(rainday)
+    {
+        _rain+=0.01f;
+        glBegin(GL_POINTS);
+        for(int i=1;i<=100;i++)
+        {
+            int x=rand(),y=rand();
+            x%=820;
+            y%=520;
+            float tmpx=float(x)/820;
+            float tmpy=float(y)/520;
+            float mintmpx=(-1)*tmpx;
+            float mintmpy=(-1)*tmpy;
 
+            ///+ + AXIS RAIN
+            glBegin(GL_LINES);
+            glColor3f(1.0, 1.0, 1.0);
+            glVertex2d(tmpx,tmpy);
+            glVertex2d(tmpx+0.05,tmpy+0.05);
+            glEnd();
+
+            ///+ - AXIS RAIN
+            glBegin(GL_LINES);
+            glVertex2d(tmpx,mintmpy);
+            glVertex2d(tmpx+0.05,mintmpy+0.05);
+            glEnd();
+
+            ///- + Axis Rain
+            glBegin(GL_LINES);
+            glColor3f(1.0, 1.0, 1.0);
+            glVertex2d(mintmpx,tmpy);
+            glVertex2d(mintmpx+0.05,tmpy+0.05);
+            glEnd();
+            ///- - Axis Rain
+            glBegin(GL_LINES);
+            glColor3f(1.0, 1.0, 1.0);
+            glVertex2d(mintmpx,mintmpy);
+            glVertex2d(mintmpx+0.05,mintmpy+0.05);
+            glEnd();
+        }
+        glutPostRedisplay();
+        glutTimerFunc(5,Rain,0);
+        glFlush();
+    }
+}
 
 void drawSun() //sun
 {
@@ -144,11 +186,34 @@ void drawSun() //sun
 		float r=0.1;
 		float x = r * cos(A);
 		float y = r * sin(A);
-		glVertex2f(x,y );
+		glVertex2f(x,y);
 	}
 	glEnd();
 	glutPostRedisplay();
 }
+
+
+void drawSun_night_moon()
+{
+    glBegin(GL_POLYGON);
+
+	for(int i=0;i<600;i++)
+	{
+		float pi=3.1416;
+		float A=(i*2*pi)/100;
+		float r=0.1;
+		float x = r * cos(A);
+		float y = r * sin(A);
+		glVertex2f(x,y);
+	}
+	glEnd();
+	glutPostRedisplay();
+}
+
+
+
+
+
 
 
 void drawCircle(float x,float y,float radius)
@@ -339,6 +404,8 @@ void drawBoat1() //boat1
     glColor4f(0.4,0.0 , 0.0 , night_mode_variable);
 
 	//Riyad's code ends
+
+
 
 
     glVertex2f(-0.833f, -0.66f);
@@ -591,74 +658,80 @@ float x=.58f;float y=-0.18; float radius =.025f;       //first wheel
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     //glLoadIdentity();
-    glClearColor(0.0f, 0.745f, 1.0f, 1.0f); // Set background color to black and opaque
+    glClearColor(sky_r, sky_g, sky_b, 1.0f); // Set background color to black and opaque
 	//glClear(GL_COLOR_BUFFER_BIT);
 	//gluOrtho2D(-2.0,2.0,-2.0,2.0);
 
     glPushMatrix(); //Sun
         glTranslatef(0.8, 0.8, 0.0);
-        glColor3f(1.0,1.0,0.0);
+        glColor4f(1.0,1.0,0.0,sunintensity);
         drawSun();
 	glPopMatrix();
 
 
+
+
+	//Riyad's code starts
+
+	glPushMatrix(); //Sun
+        glTranslatef(0.8, 0.8, 0.0);
+        glColor4f(1.0,1.0,1.0,moon_intensity);
+        drawSun_night_moon();
+	glPopMatrix();
+
+	//Riyad's code ends
+
+
+
+
+
+
 	glBegin(GL_LINES); ////Sunrays////
-	glColor3f(1.0,1.0,0.0);
+	glColor4f(1.0,1.0,0.0,sunrayintensity);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.8,0.6);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.7,0.6);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.9,0.6);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.8,1.0);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.9,1.0);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.7,1.0);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(1.2,1.0);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(1.0,0.8);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(1.0,0.6);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.5,0.7);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.5,0.5);
 	glEnd();
 	glBegin(GL_LINES);
-	glColor3f(1.0,1.0,0.0);
 	glVertex2f(0.8,0.8);
 	glVertex2f(0.5,0.9);
 	glEnd();
@@ -1214,6 +1287,9 @@ void display() {
 
 
 
+
+
+
 	glPushMatrix();
         glTranslatef(positionBus, 0.0f, 0.0f);
         drawBus1();
@@ -1240,32 +1316,101 @@ void display() {
 	glPopMatrix();
 
 
-
-glFlush();
-glutSwapBuffers();
+    glFlush();
+    glutSwapBuffers();
 }
 
 
+void handleKeypress(unsigned char key, int x, int y){
+
+
+
+     switch (key) {
+
+case 'n':
+    night_mode_key = 1 ;
+    day_mode_key = 0 ;
+
+
+    sunintensity = 0.0;
+    moon_intensity = 1.0;
+    sunrayintensity = 0.0;
+
+
+
+    sky_r=0.172;
+    sky_g=0.219;
+    sky_b=0.271;
+    
+
+    break;
+case 'd':
+    day_mode_key = 1;
+    night_mode_key = 0 ;
+
+
+    sunintensity = 1.0;
+    moon_intensity = 0.0;
+    sunrayintensity = 1.0;
+
+
+    sky_r=0.0f;
+    sky_g=0.745f;
+    sky_b=1.0f;
+
+    break;
+
+
+glutPostRedisplay();
+
+
+  }
+
+
+
+
+    if(key=='r'||key=='R')
+    {
+        rainday=true;
+        PlaySound(TEXT("Others/rsound.WAV"), NULL, SND_ASYNC|SND_FILENAME|SND_LOOP);
+        Rain(_rain);
+        sunintensity=0.20f;
+        sunrayintensity=0.0f;
+        sky_r=0.172;
+        sky_g=0.219;
+        sky_b=0.271;
+        //cout<<"pressed"<<endl;
+    }
+    else if(key=='E'||key=='e')
+    {
+        PlaySound(TEXT("Others/city.wav"), NULL, SND_ASYNC|SND_FILENAME|SND_LOOP);
+        rainday=false;
+        sunintensity=1.0f;
+        sunrayintensity=1.0f;
+        sky_r=0.0f;
+        sky_g=0.745f;
+        sky_b=1.0f;
+    }
+
+
+
+
+
+}
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitWindowSize(820, 520);
+    glutInitWindowSize(820,520);
     glutCreateWindow("Test");
-
-    //Riyad's code starts
+    glutDisplayFunc(display);
+    PlaySound(TEXT("Others/city.wav"), NULL, SND_ASYNC|SND_FILENAME|SND_LOOP);
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGBA);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable( GL_BLEND );
-    glutDisplayFunc(display);
-
-    glutKeyboardFunc(handleKeypress);
-
-    //Riyad's code ends
-
     init();
     glutTimerFunc(1000, update, 0);
+    glutKeyboardFunc(handleKeypress);
     glutMainLoop();
     return 0;
 }
-
