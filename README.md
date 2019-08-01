@@ -1,2 +1,1 @@
-# computer_graphics
-university course
+# Graphics
